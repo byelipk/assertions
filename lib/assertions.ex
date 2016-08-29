@@ -86,8 +86,11 @@ defmodule Assertions do
   # NOTE
   # Logical Operators
   #
-  # Value equality               ==
-  # Type and value equality      ===
+  # Equality                     ==
+  # Strict equality              ===
+  # Strict inequality            !==
+  # Regex match                  =~
+  # Collection member            in
   # Greater than                 >
   # Less than                    <
   # Greater than or equal to     >=
@@ -109,6 +112,16 @@ defmodule Assertions do
   def do_assert(:===, lhs, rhs) do
     IO.puts """
     FAIL: Expected #{lhs} to equal #{rhs}
+    """
+  end
+
+  def do_assert(:!==, lhs, rhs) when lhs !== rhs do
+    IO.write(".")
+  end
+
+  def do_assert(:!==, lhs, rhs) do
+    IO.puts """
+    FAIL: Expected #{lhs} to not equal #{rhs}
     """
   end
 
